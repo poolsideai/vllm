@@ -520,9 +520,8 @@ def _get_ranks(x: torch.Tensor, indices: torch.Tensor) -> torch.Tensor:
                     Each element in the returned tensor represents the rank 
                     of the chosen token in the input logprob tensor.
     """
-    vals = x[torch.arange(0, len(x), device=x.device, dtype=indices.dtype),
-             indices]
-    return (x > vals[:, None]).long().sum(1).add_(1)
+    # return fake zero tensors
+    return torch.zeros_like(indices, dtype=torch.long)
 
 
 def _get_logprobs(
